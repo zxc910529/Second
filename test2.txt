@@ -1,0 +1,35 @@
+#include<stdio.h>
+void calendar(FILE* readptr, int day, int firstdate);
+int main(void)
+{
+	FILE* input;
+	fopen_s(&input, "Test.txt", "w");
+	fprintf(input, "%4s%4s%4s%4s%4s%4s%4s\n", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
+	int day = 0;
+	int firstdate = 0;
+	printf("請輸入天數:");
+	scanf_s("%d", &day);
+	printf("\n請輸入該月第一天的星期:");
+	scanf_s("%d", &firstdate);
+	calendar(input, day, firstdate);
+	fclose(input);
+}
+
+void calendar(FILE* readptr, int day, int firstdate)
+{
+	for (size_t count = 0; count < firstdate ; count++)
+	{
+		if (firstdate <= 6)
+		{
+			fprintf(readptr, "%4s", "");
+		}
+	}
+	for (size_t count = 1; count <= day; count++)
+	{
+		fprintf(readptr, "%4d", count);
+		if ((firstdate + count) % 7 == 0)
+		{
+			fprintf(readptr, "\n");
+		}
+	}
+}
